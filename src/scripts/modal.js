@@ -1,9 +1,7 @@
 export { openPopup, animatePopup, closePopup, closePopupButton, closePopupOverlay, closePopupEsc };
-import { formEdit } from '../index';
 
 function openPopup(popup) {
     popup.classList.add('popup_is-opened');
-    animatePopup(popup);
     document.addEventListener('keydown', closePopupEsc);
 };
 
@@ -13,12 +11,11 @@ function animatePopup(popup){
 
 function closePopup(popup) {
     popup.classList.remove('popup_is-opened');
-    animatePopup(popup);
+    document.removeEventListener('keydown', closePopupEsc);
 };
 
 function closePopupButton(evt){
     closePopup(evt.target.closest('.popup'));
-    formEdit.reset();
 };
 
 function closePopupOverlay(evt){
@@ -31,6 +28,5 @@ function closePopupEsc(evt){
     if(evt.key === 'Escape') {
         closePopup(document.querySelector('.popup_is-opened'));
     }
-    document.removeEventListener('keydown', closePopupEsc);
 };
 

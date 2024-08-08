@@ -1,0 +1,14 @@
+.profile__image-edit-avatar {
+    position: absolute;
+    top: 47px;
+    left: 47px;
+    opacity: 0;
+    width: 26px;
+    height: 26px;
+    outline: none;
+    stroke: none;
+  }
+  
+  .profile__image-section:hover .profile__image-edit-avatar {
+    opacity: 1;
+  }

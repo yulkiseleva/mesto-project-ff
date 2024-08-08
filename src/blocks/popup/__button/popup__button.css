@@ -18,6 +18,11 @@
   background: rgba(0, 0, 0, 0.8);
   cursor: pointer;
 }
+.popup__button_disabled{
+  border: solid 1px #C4C4C4;
+  color: #C4C4C4;
+  background: #FFF;
+}
 
 @media screen and (max-width: 568px) {
   .popup__button {

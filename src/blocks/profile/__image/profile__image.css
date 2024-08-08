@@ -1,3 +1,6 @@
+.profile__image-section {
+  position: relative;
+}
 .profile__image {
   width: 120px;
   height: 120px;
@@ -7,6 +10,11 @@
   background-size: cover;
   background-position: center;
   margin: 0 29px 0 0;
+}
+
+.profile__image:hover {
+  background-blend-mode: multiply;
+  background-color: rgba(0, 0, 0, 0.80); 
 }
 
 @media screen and (max-width: 740px) {

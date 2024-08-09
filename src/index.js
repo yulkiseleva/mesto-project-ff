@@ -77,20 +77,19 @@ function toggleSaveButtonState(popup, isSaving) {
  
 function handleEditFormSubmit(evt) {
      evt.preventDefault();
-     profileTitle.textContent = nameInput.value;
-     profileDescription.textContent = jobInput.value;
      toggleSaveButtonState(popupEditElement, true);
      updateProfileInfo({
         name: `${profileTitle.textContent}`,
         about: `${profileDescription.textContent}`,
     })
     .then(() => {
+        profileTitle.textContent = nameInput.value;
+        profileDescription.textContent = jobInput.value;
         closePopup(popupEditElement);
         formEdit.reset();
     }) 
     .catch(err => {
-        console.log('Произошла ошибка при сохранении' + err)
-        toggleSaveButtonState(popupEditElement, false);
+        console.log('Произошла ошибка при сохранении' + err);
     })
     .finally(() => {
         toggleSaveButtonState(popupEditElement, false);
@@ -99,16 +98,16 @@ function handleEditFormSubmit(evt) {
 
  function handleProfileAvatarSubmit(evt) {
     evt.preventDefault();
-    profileImage.style.backgroundImage = `url(${linkAvatarInput.value})`;
     toggleSaveButtonState(popupEditAvatar, true);
     updateAvatar({avatar: `${linkAvatarInput.value}`})
     .then(() => {
+        profileImage.style.backgroundImage = `url(${linkAvatarInput.value})`;
         closePopup(popupEditAvatar);
         formProfileAvatar.reset();
+        clearValidation(popupEditAvatar, validationConfig);
     }) 
     .catch(err => {
-        console.log('Произошла ошибка при сохранении' + err)
-        toggleSaveButtonState(popupEditAvatar, false);
+        console.log('Произошла ошибка при сохранении' + err);
     })
     .finally(() => {
         toggleSaveButtonState(popupEditAvatar, false);
@@ -143,8 +142,7 @@ function handleEditFormSubmit(evt) {
         clearValidation(popupAddElement, validationConfig);
     }) 
     .catch(err => {
-        console.log('Произошла ошибка при сохранении' + err)
-        toggleSaveButtonState(popupAddElement, false);
+        console.log('Произошла ошибка при сохранении' + err);
     })
     .finally(() => {
         toggleSaveButtonState(popupAddElement, false);
@@ -154,6 +152,7 @@ function handleEditFormSubmit(evt) {
 
 popupElements.forEach(popup => {
     animatePopup(popup);
+    popup.addEventListener('click', closePopupOverlay);
 });
 
 profileEditButton.addEventListener('click', () => {
@@ -174,9 +173,6 @@ popupCloseButtons.forEach(button => {
     button.addEventListener('click', closePopupButton)
 });
 
-popupElements.forEach(popup => {
-    popup.addEventListener('click', closePopupOverlay);
-});
 
 formEdit.addEventListener('submit', handleEditFormSubmit);
 

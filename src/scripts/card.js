@@ -13,10 +13,11 @@ function deleteCard(card, cardId) {
 };
 
 function likeCard(button, cardId, numberOfLikesData) {
-    const isLiked = button.classList.toggle('card__like-button_is-active');
-    if(isLiked) {
+    const isLiked = button.classList.contains('card__like-button_is-active');
+    if(!isLiked) {
        putLike(cardId)
        .then(card => {
+        button.classList.add('card__like-button_is-active');
         numberOfLikesData.textContent = card.likes.length;
        })
        .catch((err) => {
@@ -25,6 +26,7 @@ function likeCard(button, cardId, numberOfLikesData) {
     } else {
         deleteLike(cardId)
         .then(card => {
+            button.classList.remove('card__like-button_is-active');
             numberOfLikesData.textContent = card.likes.length;
         })
         .catch((err) => {

@@ -26,7 +26,7 @@ const placeLink = formNew.elements['link'];
 const popupEditAvatar = document.querySelector('.popup_type_edit_avatar');
 const formProfileAvatar = document.forms['edit-profile-avatar'];
 const linkAvatarInput = formProfileAvatar.elements['avatar-link'];
-const currentUserIdValue = 'f142314f79bd777cf5274cc2';
+let currentUserIdValue;
 
 
 Promise.all([getUserInfo(), getInitialCards()])
@@ -34,6 +34,7 @@ Promise.all([getUserInfo(), getInitialCards()])
       profileTitle.textContent = userInfo.name;
       profileDescription.textContent = userInfo.about;
       profileImage.style.backgroundImage = `url(${userInfo.avatar})`;
+      currentUserIdValue = userInfo._id;
       
       initialCards.forEach((card) => {
         const cardData = {
@@ -120,9 +121,6 @@ function handleEditFormSubmit(evt) {
     postNewCard({
         name: `${placeName.value}`,
         link: `${placeLink.value}`,
-        owner:{
-            _id: `${currentUserIdValue}`,
-        },
     })
     .then((newCardData) => {
         const newCard = createCard({
